@@ -12,10 +12,10 @@ const joi = require('joi')
 // 用户名的验证规则
 const id = joi.number().required().min(1)
 const name = joi.string().min(2).max(8).required()
-const email = joi.string().email()
-const phone = joi.string().pattern(/^1(3\d|4[5-9]|5[0-35-9]|6[567]|7[0-8]|8\d|9[0-35-9])\d{8}$/)
+const email = joi.string().email().allow('')
+const phone = joi.string().pattern(/^1(3\d|4[5-9]|5[0-35-9]|6[567]|7[0-8]|8\d|9[0-35-9])\d{8}$/).allow('')
 const state = joi.string().valid("在职", "离职").required()
-const address = joi.string().min(2).max(12)
+const address = joi.string().min(2).max(12).allow('')
 
 
 /**
