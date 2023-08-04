@@ -1,7 +1,7 @@
 {
   "name": "back-end-basic-crud",
   "version": "1.0.0",
-  "description": "技术栈：ES6 + Node.js + Express",
+  "description": "技术栈：ES6 + Node.js + Express + MySQL",
   "main": "index.js",
   "scripts": {
     "dev": "node index.js"
