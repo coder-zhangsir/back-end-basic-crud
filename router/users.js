@@ -16,8 +16,11 @@ router.post('/create', expressJoi.validate(schema.create_schema), users_handle.c
 router.delete('/delete/:id', expressJoi.validate(schema.delete_schema, "params"), users_handle.delete)
 // 更改数据
 router.post('/update', expressJoi.validate(schema.update_schema), users_handle.update)
+// 查找数据ByID
+router.get('/read/:id', expressJoi.validate(schema.read_schema, "params"), users_handle.readById)
 // 查找数据
-router.get('/read/:id', expressJoi.validate(schema.read_schema, "params"), users_handle.read)
+router.get('/read', users_handle.read)
+
 
 // 将路由对象共享出去 
 module.exports = router

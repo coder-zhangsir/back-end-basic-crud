@@ -61,8 +61,8 @@ exports.update = async (req, res) => {
     })
 }
 
-// 查找数据
-exports.read = async (req, res) => {
+// 查找数据ByID
+exports.readById = async (req, res) => {
     const sql = "select * from users where id=?"
     await db.query(sql, req.params.id, (err, results) => {
         if (err) return res.cc(err)
@@ -72,6 +72,21 @@ exports.read = async (req, res) => {
             status: 0,
             msg: "查询成功！",
             data: results[0]
+        })
+    })
+}
+
+// 查找数据
+exports.read = async (req, res) => {
+    const sql = "select * from users"
+    await db.query(sql, (err, results) => {
+        if (err) return res.cc(err)
+        if (results.length === 0) return res.cc("没有查询到任何数据！")
+
+        res.send({
+            status: 0,
+            msg: "查询成功！",
+            data: results
         })
     })
 }
