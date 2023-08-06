@@ -14,6 +14,7 @@ const expressJoi = require('@zhangyongxin/express-joi')
 router.post('/create', expressJoi.validate(schema.create_schema), users_handle.create)
 // 删除数据
 router.delete('/delete/:id', expressJoi.validate(schema.delete_schema, "params"), users_handle.delete)
+router.delete('/delete', users_handle.parseIds(), expressJoi.validate(schema.delete_multiple_schema), users_handle.deleteMultiple)
 // 更改数据
 router.post('/update', expressJoi.validate(schema.update_schema), users_handle.update)
 // 查找数据ByID

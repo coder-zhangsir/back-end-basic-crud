@@ -36,7 +36,27 @@ exports.delete = async (req, res) => {
         if (results.affectedRows !== 1) return res.cc('删除失败，未查找到数据项')
 
         // 成功返回结果
-        res.cc('删除文章分类成功！', 0)
+        res.cc('删除单条数据成功！', 0)
+    })
+}
+// 删除多条数据
+exports.deleteMultiple = async (req, res) => {
+    const ids = req.body.ids
+    const str = ids.join(' or id=')
+
+    // 定义 SQL 删除语句
+    const sql = 'delete from users where id=' + str
+
+    // 执行 SQL 语句
+    await db.query(sql, (err, results) => {
+        // 执行失败
+        if (err) return res.cc(err)
+
+        // 影响行数不为1
+        if (results.affectedRows === 0) return res.cc('删除失败，未查找到数据项')
+
+        // 成功返回结果
+        res.cc('删除多条数据成功！', 0)
     })
 }
 
@@ -89,4 +109,13 @@ exports.read = async (req, res) => {
             data: results
         })
     })
+}
+
+
+// JSON.parse转换格式 中间件
+exports.parseIds = () => {
+    return (req, res, next) => {
+        req.body.ids = JSON.parse(req.body.ids)
+        next()
+    }
 }

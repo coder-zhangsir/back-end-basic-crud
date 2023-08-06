@@ -15,7 +15,9 @@ const name = joi.string().min(2).max(8).required()
 const email = joi.string().email().allow('')
 const phone = joi.string().pattern(/^1(3\d|4[5-9]|5[0-35-9]|6[567]|7[0-8]|8\d|9[0-35-9])\d{8}$/).allow('')
 const state = joi.string().valid("在职", "离职").required()
-const address = joi.string().min(2).max(12).allow('')
+const address = joi.string().min(2).max(18).allow('')
+
+const ids = joi.array().items(joi.number().required().min(1))
 
 
 /**
@@ -32,5 +34,6 @@ const create_obj = { name, email, phone, state, address }
 
 exports.create_schema = joi.object(create_obj)
 exports.delete_schema = joi.object({ id })
+exports.delete_multiple_schema = joi.object({ ids })
 exports.update_schema = joi.object({ id, ...create_obj })
 exports.read_schema = this.delete_schema
